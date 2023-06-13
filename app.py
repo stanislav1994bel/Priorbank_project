@@ -37,7 +37,7 @@ def set_png_as_page_bg(png_file):
 set_png_as_page_bg('6.jpeg')
 
 
-classifier_name=['LogisticRegression', 'XGBoost']
+classifier_name=['LogisticRegression']
 option = st.sidebar.selectbox('Алгоритмы', classifier_name)
 st.subheader(option)
 
@@ -51,8 +51,8 @@ model=pickle.load(open("model.pkl","rb"))
 #le1_pik=pickle.load(open("label_encoding_for_geo.pkl","rb"))
 
 
-def predict_churn(age, car_own_flg, car_type_flg, appl_rej_cnt, good_work_flg, Score_bki, out_request_cnt, region_rating, home_address_cd, work_address_cd, income, SNA, first_time_cd, Air_flg, education_cd_ACD, education_cd_GRD, education_cd_PGR, education_cd_SCH, education_cd_UGR, gender_cd_F, gender_cd_M):
-    input = np.array([[age, car_own_flg, car_type_flg, appl_rej_cnt, good_work_flg, Score_bki, out_request_cnt, region_rating, home_address_cd, work_address_cd, income, SNA, first_time_cd, Air_flg, education_cd_ACD, education_cd_GRD, education_cd_PGR, education_cd_SCH, education_cd_UGR, gender_cd_F, gender_cd_M]]).astype(np.float64)
+def predict_churn(id, age, car_own_flg, car_type_flg, appl_rej_cnt, good_work_flg, Score_bki, out_request_cnt, region_rating, home_address_cd, work_address_cd, income, SNA, first_time_cd, Air_flg, education_cd_ACD, education_cd_GRD, education_cd_PGR, education_cd_SCH, education_cd_UGR, gender_cd_F, gender_cd_M):
+    input = np.array([[id, age, car_own_flg, car_type_flg, appl_rej_cnt, good_work_flg, Score_bki, out_request_cnt, region_rating, home_address_cd, work_address_cd, income, SNA, first_time_cd, Air_flg, education_cd_ACD, education_cd_GRD, education_cd_PGR, education_cd_SCH, education_cd_UGR, gender_cd_F, gender_cd_M]]).astype(np.float64)
     if option == 'LogisticRegression':
         prediction = model.predict_proba(input)
         pred = '{0:.{1}f}'.format(prediction[0][0], 2)
@@ -62,7 +62,7 @@ def predict_churn(age, car_own_flg, car_type_flg, appl_rej_cnt, good_work_flg, S
 
 
 def main():
-    st.title("Прогнозирование риска дефолта")
+    st.title("Кредитный скоринг")
     html_temp = """
     <div style="background-color:white ;padding:10px">
     <h2 style="color:red;text-align:center;">Заполни форму</h2>
@@ -74,11 +74,11 @@ def main():
 
 
 
-    st.sidebar.subheader("Приложение создано для везуализации модели")
+    st.sidebar.subheader("Приложение создано для прогнозирование кредитного скоринга")
     st.sidebar.text("Разработчик - Белый С.А")
 
 
-
+    ##id = st.slider("Зарплата", 0.00, 2000000.00)
     age = st.slider("Возраст", 18, 130)
 
     Score_bki = st.slider('Скоринговый балл', 100, 800)
@@ -134,7 +134,7 @@ def main():
             """
 
     if st.button('Сделать прогноз'):
-        output = predict_churn(age, car_own_flg, car_type_flg, appl_rej_cnt, good_work_flg, Score_bki, out_request_cnt, region_rating, home_address_cd, work_address_cd, income, SNA, first_time_cd, Air_flg, education_cd_ACD, education_cd_GRD, education_cd_PGR, education_cd_SCH, education_cd_UGR, gender_cd_F, gender_cd_M)
+        output = predict_churn(id, age, car_own_flg, car_type_flg, appl_rej_cnt, good_work_flg, Score_bki, out_request_cnt, region_rating, home_address_cd, work_address_cd, income, SNA, first_time_cd, Air_flg, education_cd_ACD, education_cd_GRD, education_cd_PGR, education_cd_SCH, education_cd_UGR, gender_cd_F, gender_cd_M)
         st.success('Вероятность дефолта по кредиту составляет {}'.format(output))
         st.balloons()
 
