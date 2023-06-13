@@ -111,7 +111,7 @@ def main():
 
     education_cd_GRD = st.selectbox("Высшее образование", ['0', '1'])
 
-    education_cd_PGR = st.selectbox("Окончил магистратуру"", ['0', '1'])
+    education_cd_PGR = st.selectbox("Окончил магистратуру", ['0', '1'])
 
     education_cd_UGR = st.selectbox("Окончил аспирантуру", ['0', '1'])
 
