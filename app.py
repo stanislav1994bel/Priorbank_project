@@ -50,7 +50,7 @@ model=pickle.load(open("model.pkl","rb"))
 #le_pik=pickle.load(open("label_encoding_for_gender.pkl","rb"))
 #le1_pik=pickle.load(open("label_encoding_for_geo.pkl","rb"))
 
-np.float = float 
+
 def predict_churn(id, age, car_own_flg, car_type_flg, appl_rej_cnt, good_work_flg, Score_bki, out_request_cnt, region_rating, home_address_cd, work_address_cd, income, SNA, first_time_cd, Air_flg, education_cd_ACD, education_cd_GRD, education_cd_PGR, education_cd_SCH, education_cd_UGR, gender_cd_F, gender_cd_M):
     input = np.array([[id, age, car_own_flg, car_type_flg, appl_rej_cnt, good_work_flg, Score_bki, out_request_cnt, region_rating, home_address_cd, work_address_cd, income, SNA, first_time_cd, Air_flg, education_cd_ACD, education_cd_GRD, education_cd_PGR, education_cd_SCH, education_cd_UGR, gender_cd_F, gender_cd_M]]).astype(np.float64)
     if option == 'LogisticRegression':
