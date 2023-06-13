@@ -58,7 +58,7 @@ def predict_churn(id, age, car_own_flg, car_type_flg, appl_rej_cnt, good_work_fl
         pred = '{0:.{1}f}'.format(prediction[0][0], 2)
     else:
         red=0.30
-        return number(pred)
+        return float(pred)
 
 
 def main():
